@@ -135,6 +135,12 @@ class SimpleARView: ARView {
         case right
     }
     
+    enum GameState {
+        case start
+        case in_progress
+        case finish
+    }
+    
     var robotOrientation: Orientation = .front
     
     var robotState: RobotState = .stop {
@@ -146,11 +152,7 @@ class SimpleARView: ARView {
 
 
     // TODO: Add additional game states.
-    enum GameState {
-        case start
-        case in_progress
-        case finish
-    }
+   
     
     var gameState: GameState = .start {
         didSet {
@@ -274,6 +276,7 @@ class SimpleARView: ARView {
             robotState = .walking
         } else if robotState == .walking {
             robotState = .stop
+            self.resetTimer()
         }
     }
 
@@ -345,6 +348,7 @@ class SimpleARView: ARView {
             
             robotState = .stop
             robotEntity.position = [0,0,0]
+            resetTimer()
             break
         case .in_progress:
             print("gamestate: in progress")
@@ -354,6 +358,7 @@ class SimpleARView: ARView {
             print("gamestate: finish")
             viewModel.gameStatus = "END"
             robotState = .stop
+            resetTimer()
             break;
         }
     }
@@ -365,6 +370,7 @@ class SimpleARView: ARView {
         robotEntity.position = [0,0,0]
         robotState = .stop
         robotOrientation = .front
+        self.resetTimer()
     }
     
 
@@ -373,39 +379,46 @@ class SimpleARView: ARView {
         print("💥 Colliding with Finish pad")
         robotState = .stop
         gameState = .finish
+        self.resetTimer()
     }
     
     var timeLeft = 4.0;
     var timer: Timer?
     
     @objc func onTimerFires() {
-        timeLeft = timeLeft - 0.5;
-        print(timeLeft);
-        
-        let newPos = Float(0.05);
-        
-        switch(robotOrientation){
-            case .front:
-                robotEntity.position.z+=newPos;
-                break;
-            case .left:
-                robotEntity.position.x+=newPos;
-                break;
-            case .back:
-                robotEntity.position.z-=newPos;
-                break;
-            case .right:
-                robotEntity.position.x-=newPos;
-                break;
+        if(robotState == .walking){
+            
+            timeLeft = timeLeft - 1;
+            
+            let newPos = Float(0.05);
+            
+            switch(robotOrientation){
+                case .front:
+                    robotEntity.position.z+=newPos;
+                    break;
+                case .left:
+                    robotEntity.position.x+=newPos;
+                    break;
+                case .back:
+                    robotEntity.position.z-=newPos;
+                    break;
+                case .right:
+                    robotEntity.position.x-=newPos;
+                    break;
+            }
+            
+            if (timeLeft <= 0.0) {
+                robotState = .stop
+                self.resetTimer()
+            }
         }
         
-        if timeLeft <= 0 {
-            timeLeft = 4.0
-            print("SHOULD FIRE");
-            timer?.invalidate();
-            robotState = .stop
-            timer = nil
-        }
+    }
+    
+    func resetTimer(){
+        timeLeft = 4.0
+        timer?.invalidate();
+        timer = nil
     }
     
     // TODO: Move robot forward based on robotState variable.
@@ -427,9 +440,13 @@ class RobotEntity: Entity {
     let model: Entity
 
     init(name: String) {
-        model = try! Entity.load(named: "toy_robot_vintage")
+        //model = try! Entity.load(named: "toy_robot_vintage")
+        model = try! Entity.load(named: "robot2")
+        //model = try! Entity.load(named: "walking-zombie3")
         model.name = name
         model.generateCollisionShapes(recursive: true)
+        
+        print(model.availableAnimations);
 
         super.init()
 

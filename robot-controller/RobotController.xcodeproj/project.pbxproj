@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		51AD7D62270B9FF7007CC146 /* walking-zombie3.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 51AD7D61270B9FF7007CC146 /* walking-zombie3.usdz */; };
+		51AD7D64270BA16E007CC146 /* robot2.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 51AD7D63270BA16E007CC146 /* robot2.usdz */; };
 		6A4909AC270378B6004047EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4909AB270378B6004047EE /* AppDelegate.swift */; };
 		6A4909AE270378B6004047EE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4909AD270378B6004047EE /* ContentView.swift */; };
 		6A4909B2270378B8004047EE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A4909B1270378B8004047EE /* Assets.xcassets */; };
@@ -15,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		51AD7D61270B9FF7007CC146 /* walking-zombie3.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = "walking-zombie3.usdz"; sourceTree = "<group>"; };
+		51AD7D63270BA16E007CC146 /* robot2.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = robot2.usdz; sourceTree = "<group>"; };
 		6A4909A8270378B6004047EE /* RobotController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RobotController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A4909AB270378B6004047EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6A4909AD270378B6004047EE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -75,6 +79,8 @@
 		6A4909BC27038704004047EE /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				51AD7D63270BA16E007CC146 /* robot2.usdz */,
+				51AD7D61270B9FF7007CC146 /* walking-zombie3.usdz */,
 				6A4909BD27038715004047EE /* toy_robot_vintage.usdz */,
 			);
 			path = Models;
@@ -141,6 +147,8 @@
 				6A4909B5270378B8004047EE /* Preview Assets.xcassets in Resources */,
 				6A4909B2270378B8004047EE /* Assets.xcassets in Resources */,
 				6A4909BE27038715004047EE /* toy_robot_vintage.usdz in Resources */,
+				51AD7D62270B9FF7007CC146 /* walking-zombie3.usdz in Resources */,
+				51AD7D64270BA16E007CC146 /* robot2.usdz in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
